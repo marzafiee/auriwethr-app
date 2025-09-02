@@ -1,6 +1,7 @@
 import React from 'react';
 import Hero from "./Hero/Hero";
 import WeatherApp from "./weather-details/weatherCards";
+import TemperatureToggle from './TemperatureToggle/tempToggle';
 
 const Home = () => {
   return (

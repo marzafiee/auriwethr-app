@@ -1,6 +1,6 @@
-// components/TemperatureToggle.tsx
 "use client";
 import React from 'react';
+import ToggleSwitch from '../iconify-components/toggleSwitchIcons';
 
 interface TemperatureToggleProps {
   isCelsius: boolean;
@@ -17,27 +17,16 @@ const TemperatureToggle: React.FC<TemperatureToggleProps> = ({ isCelsius, onTogg
         WebkitBackdropFilter: 'blur(4px)',
       }}
     >
-      {/* Toggle Button using Iconify icons */}
-      <button
-        onClick={onToggle}
-        className="transition-all duration-300 hover:scale-105"
-      >
-        {isCelsius ? (
-          // Default Celsius - WHITE toggle icon
-          <span 
-            className="icon-[material-symbols-light--toggle-on-outline] text-3xl" 
-            style={{ color: '#fff' }}
-          />
-        ) : (
-          // Fahrenheit mode - BROWN toggle icon
-          <span 
-            className="icon-[material-symbols-light--toggle-off-outline] text-3xl" 
-            style={{ color: '#C9AA8F' }}
-          />
-        )}
-      </button>
+      {/* Toggle Switch Component */}
+      <ToggleSwitch
+        isOn={isCelsius}
+        onToggle={onToggle}
+        onColor="#fff"
+        offColor="#C9AA8F"
+        size={32}
+      />
       
-      {/* Temperature Unit Label - Always shows °F */}
+      {/* Unit label - separate from button */}
       <span className="text-sm font-light text-white">
         °F
       </span>
