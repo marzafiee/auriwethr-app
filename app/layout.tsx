@@ -56,8 +56,9 @@ const sfProDisplay = localFont({
 });
 
 export const metadata: Metadata = {
-  title: "Weather App",
+  title: "auriwethr-app",
   description: "Generated using Next.js",
+  //icons: {icon: "/turntabl_small.png",},
 };
 
 export default function RootLayout({

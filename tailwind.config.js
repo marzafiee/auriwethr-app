@@ -1,4 +1,6 @@
 /** @type {import('tailwindcss').Config} */
+const { iconifyPlugin } = require('@iconify/tailwind');
+
 module.exports = {
     content: [
         "./app/**/*.{js,ts,jsx,tsx}",
@@ -33,5 +35,5 @@ module.exports = {
       },
     },
   },
-  plugins: [],
+  plugins: [iconifyPlugin()],
 };

@@ -1,9 +1,13 @@
 import React from 'react'
+import Home from '../components/Home'
 
-const Home = () => {
+// this is the main component for the home page
+const HomePage = () => {
   return (
-    <div>page</div>
-  )
-}
+    <div>
+      <Home />
+    </div>
+  );
+};
 
-export default Home
+export default HomePage
