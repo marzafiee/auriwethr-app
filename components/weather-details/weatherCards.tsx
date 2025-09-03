@@ -138,12 +138,12 @@ const WeatherDetails: React.FC<WeatherDetailsProps> = ({
 const WeatherApp = () => {
   return (
     <div 
-      className="min-h-screen flex items-center justify-center p-2 relative rounded-t-[49px]"
+      className="flex items-center justify-center p-2 relative rounded-t-[49px]"
       style={{
         background: 'linear-gradient(to bottom, #3F2D1E 0%, #000000 73%)'
       }}
     >      
-      <div className="relative z-20 w-full mt-[-300] px-3">
+      <div className="relative z-20 w-full pt-4 px-4">
         <WeatherDetails 
           visibility={8}
           humidity={90}

@@ -10,26 +10,21 @@ interface TemperatureToggleProps {
 const TemperatureToggle: React.FC<TemperatureToggleProps> = ({ isCelsius, onToggle }) => {
   return (
     <div 
-      className="inline-flex items-center gap-3 px-4 py-2 rounded-full border border-white/40"
+      className="inline-flex items-start px-3 rounded-2xl border border-white/40"
       style={{
         background: 'rgba(63, 45, 30, 0.5)',
         backdropFilter: 'blur(4px)',
         WebkitBackdropFilter: 'blur(4px)',
       }}
     >
-      {/* Toggle Switch Component */}
+      {/* Toggle Switch Component - the on and off buttons and the text label */}
       <ToggleSwitch
-        isOn={isCelsius}
+        isOn={!isCelsius}
         onToggle={onToggle}
-        onColor="#fff"
-        offColor="#C9AA8F"
+        onColor="#C9AA8F"
+        offColor="#FFFFFF"
         size={32}
       />
-      
-      {/* Unit label - separate from button */}
-      <span className="text-sm font-light text-white">
-        °F
-      </span>
     </div>
   );
 };

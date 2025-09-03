@@ -2,6 +2,7 @@ import React from 'react';
 import { Icon } from '@iconify/react';
 
 interface ToggleSwitchProps {
+  unitColor?: string;
   isOn: boolean;
   onToggle: () => void;
   onColor?: string;
@@ -11,34 +12,43 @@ interface ToggleSwitchProps {
 }
 
 const ToggleSwitch: React.FC<ToggleSwitchProps> = ({ 
+  unitColor = '#ffffff',
   isOn, 
   onToggle, 
-  onColor = '#fff', 
-  offColor = '#C9AA8F', 
-  size = 24,
+  onColor = '#C9AA8F', 
+  offColor = '#FFFFFF', 
+  size = 32,
   className = ''
 }) => {
   return (
-    <button
-      onClick={onToggle}
-      className={`transition-all duration-300 hover:scale-105 ${className}`}
-    >
-      {isOn ? (
-        <Icon 
-          icon="material-symbols-light:toggle-on-outline" 
-          width={size} 
-          height={size}
-          style={{ color: onColor }}
-        />
-      ) : (
-        <Icon 
-          icon="material-symbols-light:toggle-off-outline" 
-          width={size} 
-          height={size}
-          style={{ color: offColor }}
-        />
-      )}
-    </button>
+    <div className={`flex items-center gap-0.5 ${className}`}>
+      <button
+        onClick={onToggle}
+        className= {`transition-all duration-300 hover:scale-105 ${className}`}
+      >
+        {isOn ? (
+          <Icon 
+            icon="material-symbols-light:toggle-on-outline" 
+            width={size} 
+            height={size}
+            style={{ color: onColor }}
+          />
+        ) : (
+          <Icon 
+            icon="material-symbols-light:toggle-off-outline" 
+            width={size} 
+            height={size}
+            style={{ color: offColor }}
+          />
+        )}
+      </button>
+      <span 
+        className="text-1xl font-bold transition-colors duration-100"
+        style={{ color: isOn ? '#C9AA8F' : unitColor }}
+      >
+        °F
+      </span>
+    </div>
   );
 };
 
