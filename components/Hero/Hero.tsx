@@ -48,7 +48,7 @@ const Hero = () => {
 
   return (
     <div 
-      className="relative w-full h-[60vh] sm:h-screen flex flex-col overflow-hidden pl-1.5"
+      className="relative w-full h-[45vh] sm:h-screen flex flex-col overflow-hidden pl-1.5"
       style={{
         backgroundImage: "url('/images/forest-bg.jpg')",
         backgroundSize: 'cover',
@@ -57,10 +57,10 @@ const Hero = () => {
       }}
     >
       {/* content flex */}
-      <div className="relative z-20 flex flex-col h-full p-6 sm:p-8">
+      <div className="relative z-20 flex flex-col h-full p-6 sm:p-8 ">
         
         {/*top lefts ection; Location with Icon */}
-        <div className="flex items-start mb-8 pt-4">
+        <div className="flex items-start mb-8 pt-4 sm:mb- md:mb- lg:mb-30">
           <div className="flex items-center gap-2">
             {/* Location Icon -> a simple SVG*/}
             <svg width="12" height="16" viewBox="0 0 12 16" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -74,27 +74,29 @@ const Hero = () => {
         <div className="mt-auto">
           {/* Large Temperature value with a fixed degree symbol size */}
           <div className="flex items-start mb-3">
-            <span className="text-[120px] sm:text-[140px] font-light leading-none tracking-tight">
+            <span className="text-[120px] sm:text-[140px] md:text-[180px] lg:text-[200px] font-normal leading-none tracking-tight">
               {getCurrentTemp()}°
             </span>
-            {/* Normal F text, same baseline */}
-            <span className="text-[120px] sm:text-[140px] font-light leading-none tracking-tight ml-2">
-              {isCelsius ? 'C' : 'F'}
-            </span>
+            {/* small F text, same baseline */}
+            <div className="self-start mt-13 sm:mt-16 lg:mt-16">  
+              <span className="text-[60px] sm:text-[65px] md:text-[80px] lg:text-[120px] font-light leading-none tracking-tight ml-2">
+                {isCelsius ? 'C' : 'F'}
+              </span>
+            </div>
           </div>
           
           {/* weather condition */}
-          <div className="text-lg font-normal">
+          <div className="text-lg font-normal sm:text-[22px] md:text-[26px] lg:text-[30px]">
             {mockWeatherData.condition}
           </div>
           
           {/* high/low temperatures */}
-          <div className="text-sm opacity-80 mt-">
+          <div className="text-sm opacity-80 sm:text-[16px] md:text-[20px] lg:text-[24px]">
             ↑{high}° ↓{low}°
           </div>
           
           {/* feels like */}
-          <div className="text-sm opacity-80 mb-2">
+          <div className="text-sm opacity-80 mb-2 sm:text-[16px] md:text-[20px] lg:text-[24px]">
             Feels like {getFeelsLike()}°
           </div>
 

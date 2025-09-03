@@ -8,7 +8,7 @@ interface WeatherDetailsProps {
   windDirection?: string;
   sunrise?: string; // time string
   sunset?: string; // time string
-  forecast?: string; // e.g., "Morning clouds followed by afternoon sun"
+  forecast?: string; 
 }
 
 const WeatherDetails: React.FC<WeatherDetailsProps> = ({
@@ -47,7 +47,7 @@ const WeatherDetails: React.FC<WeatherDetailsProps> = ({
       <div className="grid grid-cols-2 gap-4">
         {/* Visibility */}
         <div className="bg-[#4D3C2E]/69 rounded-[22px] p-4 text-white relative border border-white/[0.03] stroke-white/3">
-          <div className="flex justify-end mb-3">
+          <div className="flex justify-end">
             <Eye className="w-5 h-5 text-white/70" />
           </div>
           <div className="text-[48px] font-light mb-2 leading-none tracking-tight">
@@ -59,7 +59,7 @@ const WeatherDetails: React.FC<WeatherDetailsProps> = ({
 
         {/* humidity card */}
         <div className="bg-[#4D3C2E]/69 rounded-[22px] p-4 text-white relative border border-white/[0.03] stroke-white/3">
-          <div className="flex justify-end mb-3">
+          <div className="flex justify-end">
             <Droplets className="w-5 h-5 text-white/70" />
           </div>
           <div className="text-[48px] font-light mb-2 leading-none tracking-tight">
