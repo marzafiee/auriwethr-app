@@ -26,7 +26,7 @@ const HomePage = () => {
   }
   return (
     <div>
-      <Home />
+      <Home weatherData={WeatherData} />
     </div>
   );
 };

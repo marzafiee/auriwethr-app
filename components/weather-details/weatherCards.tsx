@@ -2,24 +2,70 @@ import React from 'react';
 import { Eye, Droplets, Wind } from 'lucide-react'; // found some cool replicas of the icons I had
 
 interface WeatherDetailsProps {
-  visibility?: number; // in km
-  humidity?: number; // percentage
-  windSpeed?: number; // in mph
-  windDirection?: string;
-  sunrise?: string; // time string
-  sunset?: string; // time string
-  forecast?: string; 
+  weatherData: any; // accepting the API data
 }
 
-const WeatherDetails: React.FC<WeatherDetailsProps> = ({
-  visibility = 8,
-  humidity = 90,
-  windSpeed = 6,
-  windDirection = "WSW",
-  sunrise = "6:30 AM",
-  sunset = "9:00 PM",
-  forecast = "Morning clouds followed by afternoon sun"
-}) => {
+const WeatherDetails: React.FC<WeatherDetailsProps> = ({ weatherData }) => {
+  
+  // Transform API data for weather details
+  const getDetailedWeatherData = () => {
+    if (!weatherData) return null;
+    
+    return {
+      visibility: weatherData.visibility ? Math.round(weatherData.visibility / 1000) : 8, // convert m to km, fallback to 8
+      humidity: weatherData.main?.humidity || 90, // percentage, fallback to 90
+      windSpeed: weatherData.wind?.speed ? Math.round(weatherData.wind.speed * 2.237) : 6, // convert m/s to mph, fallback to 6
+      windDirection: getWindDirection(weatherData.wind?.deg) || "WSW", // fallback to WSW
+      sunrise: weatherData.sys?.sunrise ? formatTime(weatherData.sys.sunrise) : "6:30 AM", // fallback to 6:30 AM
+      sunset: weatherData.sys?.sunset ? formatTime(weatherData.sys.sunset) : "9:00 PM", // fallback to 9:00 PM
+      forecast: weatherData.weather?.[0]?.description ? 
+        capitalizeFirstLetter(weatherData.weather[0].description) : 
+        "Morning clouds followed by afternoon sun" // fallback forecast
+    };
+  };
+
+  // function to convert wind degrees to direction
+  const getWindDirection = (degrees: number): string => {
+    if (!degrees && degrees !== 0) return "";
+    const directions = ["N", "NNE", "NE", "ENE", "E", "ESE", "SE", "SSE", "S", "SSW", "SW", "WSW", "W", "WNW", "NW", "NNW"];
+    return directions[Math.round(degrees / 22.5) % 16];
+  };
+
+  // function to convert Unix timestamp to time string
+  const formatTime = (timestamp: number): string => {
+    return new Date(timestamp * 1000).toLocaleTimeString([], {
+      hour: 'numeric', 
+      minute: '2-digit',
+      hour12: true
+    });
+  };
+
+  // function to capitalize first letter of description
+  const capitalizeFirstLetter = (str: string): string => {
+    return str.charAt(0).toUpperCase() + str.slice(1);
+  };
+
+  const detailsData = getDetailedWeatherData();
+
+  // If there is no weather data, show loading or fallback
+  if (!detailsData) {
+    return (
+      <div className="w-full max-w-lg mx-auto sm:max-w-lg md:max-w-xl space-y-4 text-white text-center">
+        Loading weather details...
+      </div>
+    );
+  }
+
+  const {
+    visibility,
+    humidity,
+    windSpeed,
+    windDirection,
+    sunrise,
+    sunset,
+    forecast
+  } = detailsData;
+
   return (
     <div className="w-full max-w-lg mx-auto sm:max-w-lg md:max-w-xl space-y-4">
       {/* forecast card */}
@@ -135,7 +181,12 @@ const WeatherDetails: React.FC<WeatherDetailsProps> = ({
   );
 };
 
-const WeatherApp = () => {
+// Updated WeatherApp to accept weatherData prop
+interface WeatherAppProps {
+  weatherData: any;
+}
+
+const WeatherApp: React.FC<WeatherAppProps> = ({ weatherData }) => {
   return (
     <div 
       className="flex items-center justify-center p-2 relative rounded-t-[49px]"
@@ -144,19 +195,10 @@ const WeatherApp = () => {
       }}
     >      
       <div className="relative z-20 w-full pt-4 px-4">
-        <WeatherDetails 
-          visibility={8}
-          humidity={90}
-          windSpeed={6}
-          windDirection="WSW"
-          sunrise="6:30 AM"
-          sunset="9:00 PM"
-          forecast="Morning clouds followed by afternoon sun"
-        />
+        <WeatherDetails weatherData={weatherData} />
       </div>
     </div>
   );
 };
 
 export default WeatherApp;
-
